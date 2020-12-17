@@ -48,6 +48,12 @@ var currentWeather = (event) => {
                 <li id="uvIndex">UV Index:</li>
             </ul>
 
+        $('#current-weather').html(currentWeatherHTML);
+
+        let latitude = response.coord.lat;
+        let longitude = response.coord.lon;
+        let uvQueryURL = "api.openweathermap.org/data/2.5/uvi?lat=" + latitude + "&lon=" + longitude + "&appid=" + ownKey;
+
 
     })
 
