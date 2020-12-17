@@ -13,8 +13,19 @@ var currentWeather = (event) => {
     let city = $('#search-city').val();
     currentCity = $("#search-city").val();
 
-    let 
+    let queryURL="api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + ownKey;
+
+    fetch(queryURL)
+    .then(anError)
+    .then(response) => {
+        return response.json();
+    })
+
+    .then((response)) => {
+
+        saveCity(city);
+    }
+
 }
 
 
-api.openweathermap.org/data/2.5/weather?q={city name}&appid={API key}
