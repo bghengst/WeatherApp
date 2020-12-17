@@ -32,6 +32,17 @@ var currentWeather = (event) => {
         let currentTimeZoneOffset=response.timezone;
         let currentTimeZoneOffsetHours = currentTimeZoneOffset / 60 / 60;
         let currentMoment = moment.unix(currentTimeUTC).utcOffset(currentTimeZoneOffsetHours);
+
+        renderCities();
+
+        getFiveDayForecast(event);
+
+        $('#header-text').text(response.name);
+
+        let currentWeatherHTML =
+            <h3>${response.name} ${currentMoment.format("(MM/DD/YY)")}<img src="${currentWeatherIcon}"></h3>
+
+
     })
 
 }
