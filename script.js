@@ -27,6 +27,11 @@ var currentWeather = (event) => {
         $('#search-error').text("");
 
         let currentWeatherIcon="api.openweathermap.org/data/2.5/weather?q=" + response.weather[0].icon + ".png";
+
+        let currentTimeUTC = response.dt;
+        let currentTimeZoneOffset=response.timezone;
+        let currentTimeZoneOffsetHours = currentTimeZoneOffset / 60 / 60;
+        let currentMoment = moment.unix(currentTimeUTC).utcOffset(currentTimeZoneOffsetHours);
     })
 
 }
