@@ -54,7 +54,21 @@ var currentWeather = (event) => {
         let longitude = response.coord.lon;
         let uvQueryURL = "api.openweathermap.org/data/2.5/uvi?lat=" + latitude + "&lon=" + longitude + "&appid=" + ownKey;
 
+        uvQueryURL = "https://cors-anywhere.herokuapp.com/" + uvQueryURL;
 
+        fetch(uvQueryURL)
+        .then(anError)
+        .then((response)) =>{
+            return response.json();
+        })
+
+        .then((response)) => {
+            let uvIndex = response.value;
+            $('#uvIndex').html('UL Index:'<span id="uvVal"> ${uvIndex}</span>);
+            
+        }
+        
+        
     })
 
 }
