@@ -41,6 +41,12 @@ var currentWeather = (event) => {
 
         let currentWeatherHTML =
             <h3>${response.name} ${currentMoment.format("(MM/DD/YY)")}<img src="${currentWeatherIcon}"></h3>
+            <ul class="list-unstyled">
+                <li>Temperature: $(response.main.temp)&#8457;</li>
+                <li>Humidity: ${response.main.humidity}%</li>
+                <li>Wind Speed: ${response.wind.speed} mph</li>
+                <li id="uvIndex">UV Index:</li>
+            </ul>
 
 
     })
