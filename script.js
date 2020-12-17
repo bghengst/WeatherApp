@@ -21,10 +21,13 @@ var currentWeather = (event) => {
         return response.json();
     })
 
-    .then((response)) => {
+    .then((response) => {
 
         saveCity(city);
-    }
+        $('#search-error').text("");
+
+        let currentWeatherIcon="api.openweathermap.org/data/2.5/weather?q=" + response.weather[0].icon + ".png";
+    })
 
 }
 
