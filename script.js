@@ -58,19 +58,33 @@ var currentWeather = (event) => {
 
         fetch(uvQueryURL)
         .then(anError)
-        .then((response)) =>{
+        .then((response)) => {
             return response.json();
         })
 
         .then((response)) => {
             let uvIndex = response.value;
             $('#uvIndex').html('UL Index:'<span id="uvVal"> ${uvIndex}</span>);
-            
-        }
+            if(uvIndex>=0 && uvIndex<3){
+                $('#uvVal').attr("class", "uv-favorable");
+                 }
+                 else if (uvIndex>=3 && uvIndex<8){
+                    $('#uvVal').attr("class", "uv-moderate");
+                 }
+                 else if (uvIndex>=8){
+                     $('#uvVal').attr("class", "uv-severe");
+                 }
+        });
         
         
     })
 
 }
 
+var getFiveDayForecast = (event) => {
+    let city = $('#search-city').val();
+
+    let queryURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + city + "&units=imperial" + "&APPID=" + ownKey;
+    
+}
 
