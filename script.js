@@ -107,13 +107,28 @@ var getFiveDayForecast = (event) => {
                     fiveDayForecast +=
                     <div class="weather-card card m-2 p0">
                     <ul class="list-unstyled p-3">
-                        
+                        <li>${thisMoment.format("MM/DD/YY")}</li> 
+                        <li class="weather-icon"><img src="${iconURL}"</li> 
+                        <li>Temp: ${dayData.main.humidity}%</li> 
+                        <br>
+                        <li>Humidity: ${dayData.main.humidity}%</li>
                     </ul>
+                    </div>;
+
                 }
 
-
             }
-        </div>
-    }
+        
+        fiveDayForecastHTML += '</div>';
+
+        $('#five-day-forecast').html(fiveDayForecastHTML);
+        
+    })
 }
+
+    var saveCity = (newCity =>{
+        let cityExists = false;
+
+        for
+    })
 
