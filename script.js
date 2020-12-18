@@ -192,3 +192,9 @@ var renderCities = () => {
         getCurrentConditions(event);
     })
 
+$('#city-results').on("click", (event) => {
+    event.preventDefault();
+    $('#search-city').val(event.target.textContent);
+    currentCity=$('#search-city').val();
+    getCurrentConditions(event);
+})
