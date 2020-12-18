@@ -85,6 +85,19 @@ var getFiveDayForecast = (event) => {
     let city = $('#search-city').val();
 
     let queryURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + city + "&units=imperial" + "&APPID=" + ownKey;
+    fetch(queryURL)
+        .then(an error)
+        .then((response) =>{
+            return response.json();
+        })
     
+    .then ((response)) => {
+
+        let fiveDayForecastHTML=
+        <h2>5-Day Forecast</h2>
+        <div id="fiveDayForecastU1" class="d-inline-flex felx-wrap" >';
+            
+        </div>
+    }
 }
 
