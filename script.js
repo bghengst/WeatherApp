@@ -142,3 +142,20 @@ var getFiveDayForecast = (event) => {
         }
     }
 
+var renderCities = () => {
+    $('#city-results').empty();
+    if (localStorage.length===0){
+        if(lastCity){
+            $('#search-city').attr("value", lastCity);
+
+        }
+        else {  
+            $('#search-city').attr("value","New York");
+        }
+
+    } else {
+
+        
+    }
+}
+
