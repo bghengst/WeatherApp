@@ -96,7 +96,23 @@ var getFiveDayForecast = (event) => {
         let fiveDayForecastHTML=
         <h2>5-Day Forecast</h2>
         <div id="fiveDayForecastU1" class="d-inline-flex felx-wrap" >';
-            
+            for (let i=0; i < response.list.length; i++){
+                let dayData = respnse.list[i];
+                let dayTimeUTC = dayData.dt;
+                let timeZoneOffset = response.city.timezone;
+                let timeZoneOffsetHours = timeZoneOffset / 60 / 60;
+                let thisMoment = moment.unix(dayTimeUTC).utc().utcOffset(timeZoneOffsetHours);
+
+                if(thisMoment.format("HH:mm:ss") === "11:00:00" || thisMoment.format("HH:mm:ss") === "12:00:00" || thisMoment.format("HH:mm:ss") === "13:00:00"){
+                    fiveDayForecast +=
+                    <div class="weather-card card m-2 p0">
+                    <ul class="list-unstyled p-3">
+                        
+                    </ul>
+                }
+
+
+            }
         </div>
     }
 }
