@@ -126,9 +126,19 @@ var getFiveDayForecast = (event) => {
     })
 }
 
-    var saveCity = (newCity =>{
+    var saveCity = (newCity) =>{
         let cityExists = false;
 
-        for
-    })
+        for (let i = 0; i < localStorage.length; i++){
+            if (localStorage["cities" + i] === newCity){
+                cityExists = true;
+                break;
+            }
+
+        }
+
+        if (cityExists === false){
+            localStorage.setItem('cities' + localStorage.length, newCity);
+        }
+    }
 
