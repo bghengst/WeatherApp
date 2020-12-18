@@ -186,3 +186,9 @@ var renderCities = () => {
     }
 }
 
+    $('#search-button').on("click", (event) => {
+        event.preventDefault();
+        currentCity = $('#search-city').val();
+        getCurrentConditions(event);
+    })
+
