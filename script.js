@@ -176,19 +176,19 @@ $(document).ready(function(){
         country = "";
       }
 
-      
-    } else {
-        let lastCityKey="cities"+(localStorage.length-1);
-        lastCity=localStorage.getItem(lastCityKey);
-        $('#search-city').attr("value", lastCity);
 
-        for (let i = 0; i < localStorage.length; i++){
-            let city = localStorage.getItem("cities" + i);
-            let cityEl;
+    function searchCity(cityName){
 
-            if (currentCity===""){
-                currentCity=lastCity;
-            }
+ console.log(cityName);
+ var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + 
+ cityName + "&appid=" + APIKey;
+
+ 
+ $.ajax({
+   url: queryURL,
+   method: "GET"
+ })
+
 
             if (city === currentCity){
                 cityEl = '<button type="button" class="list-group-item-action active">${city}</button></li>' ;
