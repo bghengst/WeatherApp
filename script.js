@@ -213,24 +213,31 @@ $(document).ready(function(){
       method: "GET"
     })
 
-    $('#search-button').on("click", (event) => {
-        event.preventDefault();
-        currentCity = $('#search-city').val();
-        getCurrentConditions(event);
-    })
-
-$('#city-results').on("click", (event)  {
-    event.preventDefault();
-    $('#search-city').val(event.target.textContent);
-    currentCity=$('#search-city').val();
-    getCurrentConditions(event);
-})
-
-$("#clear-storage").on("click", (event) {
-    localStorage.clear();
-    renderCities();
-})
-
-renderCities();
-
-getCurrentConditions();
+    .then(function(response) {
+        uvIndexValue = response.value;
+        displayCurrentWeather()
+         
+        var fiveDayQueryUrl = "https://api.openweathermap.org/data/2.5/forecast/daily?q=" + city + "&appid=" + APIKey + "&cnt=5";
+        $.ajax({
+          url: fiveDayQueryUrl,
+          method: "GET"
+        })
+        .then(function(response) {
+          var fiveDayForecast = response.list;
+          addCardDeckHeader()
+          for (var i=0; i < 5; i++) {
+            iconcode = fiveDayForecast[i].weather[0].icon;
+            iconurl = "https://openweathermap.org/img/w/" + iconcode + ".png";
+          
+           dateValue = moment.unix(fiveDayForecast[i].dt).format('l');
+            minTempK = fiveDayForecast[i].temp.min;
+            minTempF =  ((minTempK - 273.15) * 1.80 + 32).toFixed(1);
+            maxTempK = fiveDayForecast[i].temp.max;
+            maxTempF =  (((fiveDayForecast[i].temp.max) - 273.15) * 1.80 + 32).toFixed(1);
+            dayhumidity = fiveDayForecast[i].humidity;
+            displayDayForeCast()
+          } 
+        });      
+      }); 
+    });
+   }
