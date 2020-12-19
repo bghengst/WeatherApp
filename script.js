@@ -155,17 +155,28 @@ $(document).ready(function(){
         return colorcode;
       }
 
-var renderCities = () => {
-    $('#city-results').empty();
-    if (localStorage.length===0){
-        if(lastCity){
-            $('#search-city').attr("value", lastCity);
+      function resetGlobalVariables() {
+        city = "";
+        currentDate = "";
+        tempF = "";
+        humidityValue = "";
+        windSpeed = "";
+        uvIndexValue = "";
+        latitude = "";
+        longitude = "";
+        minTempK = "";
+        maxTempK = "";
+        minTempF = "";
+        maxTempF = "";
+        dayhumidity = "";
+        currentWeatherIconCode = "";
+        currentWeatherIconUrl = "";
+        iconcode = "";
+        iconurl = "";
+        country = "";
+      }
 
-        }
-        else {  
-            $('#search-city').attr("value","New York");
-        }
-
+      
     } else {
         let lastCityKey="cities"+(localStorage.length-1);
         lastCity=localStorage.getItem(lastCityKey);
