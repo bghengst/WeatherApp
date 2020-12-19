@@ -180,8 +180,7 @@ $(document).ready(function(){
     function searchCity(cityName){
 
  console.log(cityName);
- var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + 
- cityName + "&appid=" + APIKey;
+ var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&appid=" + APIKey;
 
  
  $.ajax({
