@@ -68,24 +68,25 @@ $(document).ready(function(){
             searchCity(cityName);
     });
 
-        .then((response)) => {
-            let uvIndex = response.value;
-            $('#uvIndex').html('UL Index:'<span id="uvVal"> ${uvIndex}</span>);
-            if(uvIndex>=0 && uvIndex<3){
-                $('#uvVal').attr("class", "uv-favorable");
-                 }
-                 else if (uvIndex>=3 && uvIndex<8){
-                    $('#uvVal').attr("class", "uv-moderate");
-                 }
-                 else if (uvIndex>=8){
-                     $('#uvVal').attr("class", "uv-severe");
-                 }
-        });
-        
-        
-    })
-
-}
+    function displayCurrentWeather() {
+        var cardDiv = $("<div class='container border bg-light'>");
+        var weatherImage = $("<img>").attr('src', currentWeatherIconUrl);
+        var cardHeader = $("<h4>").text(city + " " + currentDate.toString());
+        cardHeader.append(weatherImage);
+        var temperatureEl = $("<p>").text("Temperature: " + tempF+ " ºF");
+        var humidityEl = $("<p>").text("Humidity: " + humidityValue + "%");
+        var windSpeedEl = $("<p>").text("Wind Speed: " + windSpeed + " MPH");
+        var uvIndexEl = $("<p>").text("UV Index: ");
+        // var uvIndexValueEl = $("<span>").text(uvIndexValue).css("background-color", getColorCodeForUVIndex(uvIndexValue)).addClass("text-white");
+        var uvIndexValueEl = $("<span>").text(uvIndexValue).css("background-color", getColorCodeForUVIndex(uvIndexValue)); 
+        uvIndexEl.append(uvIndexValueEl);
+        cardDiv.append(cardHeader);
+        cardDiv.append(temperatureEl);
+        cardDiv.append(humidityEl);
+        cardDiv.append(windSpeedEl);
+        cardDiv.append(uvIndexEl);
+        $("#current-weather-conditions").append(cardDiv);
+      }
 
 var getFiveDayForecast = (event) => {
     let city = $('#search-city').val();
