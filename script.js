@@ -110,31 +110,29 @@ $(document).ready(function(){
         $(".card-deck").append(cardEl);
       }
 
-                if(thisMoment.format("HH:mm:ss") === "11:00:00" || thisMoment.format("HH:mm:ss") === "12:00:00" || thisMoment.format("HH:mm:ss") === "13:00:00"){
-                    fiveDayForecast +=
-                    <div class="weather-card card m-2 p0">
-                    <ul class="list-unstyled p-3">
-                        <li>${thisMoment.format("MM/DD/YY")}</li> 
-                        <li class="weather-icon"><img src="${iconURL}"</li> 
-                        <li>Temp: ${dayData.main.humidity}%</li> 
-                        <br>
-                        <li>Humidity: ${dayData.main.humidity}%</li>
-                    </ul>
-                    </div>;
-
-                }
-
-            }
-        
-        fiveDayForecastHTML += '</div>';
-
-        $('#five-day-forecast').html(fiveDayForecastHTML);
-        
-    })
-}
-
-    var saveCity = (newCity) =>{
-        let cityExists = false;
+      function addCardDeckHeader() {
+        deckHeader = $("<h4>").text("5-Day Forecast").attr("id", "card-deck-title");
+        deckHeader.addClass("pt-4 pt-2");
+        $(".card-deck").before(deckHeader);
+      }
+      
+      function clearDisplayedWeatherInfo() {
+        $("#current-weather-conditions").empty();
+        $("#card-deck-title").remove();
+        $(".card-deck").empty();
+      }
+      
+      function displayCities(citiesList) {
+        $("#searched-cities-card").removeClass("hide");
+        var count = 0;
+        citiesList.length > 5 ? count = 5 : count = citiesList.length
+        for (var i=0; i < count; i++) {
+          $("#searched-cities-list").css("list-style-type", "none");
+          $("#searched-cities-list").append(`<a href="#" class="list-group-item" style="text-decoration: none; color: black;">
+          <li>${citiesList[i]}</li>
+          </a>`);
+        }
+      }
 
         for (let i = 0; i < localStorage.length; i++){
             if (localStorage["cities" + i] === newCity){
