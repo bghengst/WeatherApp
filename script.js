@@ -36,34 +36,31 @@ $(document).ready(function(){
             
 
 
-    then((response) => {
+  $("#search-btn").on("click", function() {
+    event.preventDefault();
+    clearDisplayedWeatherInfo()
+    resetGlobalVariables()
+    var cityName = $("input").val().toUpperCase().trim();
+    $("#search-input").val("");
+    searchCity(cityName);
 
-        saveCity(city);
-        $('#search-error').text("");
-
-        let currentWeatherIcon="https://openweathermap.org/img/w/" + response.weather[0].icon + ".png";
-
-        let currentTimeUTC = response.dt;
-        let currentTimeZoneOffset=response.timezone;
-        let currentTimeZoneOffsetHours = currentTimeZoneOffset / 60 / 60;
-        let currentMoment = moment.unix(currentTimeUTC).utc().utcOffset(currentTimeZoneOffsetHours);
-
-        renderCities();
-
-        getFiveDayForecast(event);
-
-        $('#header-text').text(response.name);
-
-        let currentWeatherHTML =
-            <h3>${response.name} ${currentMoment.format("(MM/DD/YY)")}<img src="${currentWeatherIcon}"></h3>
-                
-            <ul class="list-unstyled">
-                <li>Temperature: $(response.main.temp)&#8457;</li>
-                <li>Humidity: ${response.main.humidity}%</li>
-                <li>Wind Speed: ${response.wind.speed} mph</li>
-                <li id="uvIndex">UV Index:</li>
-            </ul>
-
+    if (cityName !== ""&& listOfSearchedCities[0] !== cityName) {
+        listOfSearchedCities.unshift(cityName);
+        localStorage.setItem("searched-cities", JSON.stringify(listOfSearchedCities));
+        if (listOfSearchedCities.length === 1) {
+          $("#searched-cities-card").removeClass("hide");
+        }
+        
+        console.log($("ul#searched-cities-list a").length);
+        if ($("ul#searched-cities-list a").length >= 5) {
+          ($("ul#searched-cities-list a:eq(4)").remove());
+        }
+        $("#searched-cities-list").prepend(`<a href="#" class="list-group-item" style="text-decoration: none; color: black;">
+        <li>${cityName}</li>
+        </a>`);
+      }
+    });
+    
         $('#current-weather').html(currentWeatherHTML);
 
         let latitude = response.coord.lat;
