@@ -13,50 +13,46 @@
 </head>
 
 <body>
-
-    <div id="header" class="jumbotron jumbotron-fluid text-container">
-        <h1 id="header-text" class="display-2"></h1>
-        <div id="header-container"></div>
-
+    <div class="jumbotron jumbotron-fluid bg-dark text-white">
+      <h2 class="text-center">Weather Dashboard</h2>
     </div>
-
-    <div id="content" class="container">
-        <div class="row">
-
-            <div id="content-left" class="col-md-3">
-                <form>
-                    <label for="search-city">Search For A City:</label>
-                    <div class="form-row">
-                        <input id="search-city" class="form-control" name="City" value="New York"></input>
-
-                        <button id="search-button" class="btn btn-primary" type="submit"><i class="fas fa-search"></i></button>
-                 
-                    </div>
-
+  
+    <div class="container">
+      <div class="row">
+       
+        <div class="col-lg-4">
+          <div class="card" id="search-cities"> 
+            <div class="card-header"> 
+              <h6>Search for a City:</h6>
+                <form class="form-inline pb-2">
+                  <input type="text" class="form-control mr-2" id="search-input">
+                  <button type="submit" class="btn btn-primary" id="search-btn">
+                    <i class="fa fa-search"></i>
+                  </button>
                 </form>
-                
-                <div id="search-error"></div>
-                <ul id="city-results" class="list-group mt-4"></ul>
-
-                <a id="clear-storage" href="#"></a>
+  
+                <div class="card hide" id="searched-cities-card">
+                  <ul class="list-group list-group-flush" id="searched-cities-list">
+                  </ul>
+                </div>
             </div>
-
-            <div id="content-right" class="col-md-9 pt-4">
-                <div id="current-weather" class="border rounded">
-               </div>
-
-               <div id="five-day-forecast" class="mt-5">
-
-               </div>
-
-
-
-            </div>
-
+          </div> 
         </div>
-
-
+  
+        <div class="col-lg-8">
+         
+          <div class="row" id="current-weather-conditions">
+          </div>
+  
+          
+          <div class="row" id="five-day-forecast">
+            <div class="card-deck w-100">
+            </div>
+          </div>
+          
+      </div>
     </div>
+    
     <script src="scountry-code-to-country-name-conversion.js"></script> 
     <script src="script.js"></script>
 </body>
