@@ -88,27 +88,27 @@ $(document).ready(function(){
         $("#current-weather-conditions").append(cardDiv);
       }
 
-var getFiveDayForecast = (event) => {
-    let city = $('#search-city').val();
-
-    let queryURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + city + "&units=imperial" + "&APPID=" + ownKey;
-    fetch(queryURL)
-        .then(an error)
-        .then((response) =>{
-            return response.json();
-        })
-    
-    .then ((response)) => {
-
-        let fiveDayForecastHTML=
-        <h2>5-Day Forecast</h2>
-        <div id="fiveDayForecastU1" class="d-inline-flex felx-wrap" >';
-            for (let i=0; i < response.list.length; i++){
-                let dayData = respnse.list[i];
-                let dayTimeUTC = dayData.dt;
-                let timeZoneOffset = response.city.timezone;
-                let timeZoneOffsetHours = timeZoneOffset / 60 / 60;
-                let thisMoment = moment.unix(dayTimeUTC).utc().utcOffset(timeZoneOffsetHours);
+      function displayDayForeCast() { 
+        var imgEl = $("<img>").attr("src", iconurl);  
+        var cardEl = $("<div class='card'>").addClass("pl-1 bg-primary text-light");
+        var cardBlockDiv = $("<div>").attr("class", "card-block");
+        var cardTitleDiv = $("<div>").attr("class", "card-block");
+        var cardTitleHeader = $("<h6>").text(dateValue).addClass("pt-2");
+        var cardTextDiv = $("<div>").attr("class", "card-text");
+        var minTempEl = $("<p>").text("Min Temp: " + minTempF + " ºF").css("font-size", "0.60rem");
+        var maxTempEl = $("<p>").text("Max Temp: " + maxTempF + " ºF").css("font-size", "0.60rem");
+        var humidityEl = $("<p>").text("Humidity: " + dayhumidity + "%").css("font-size", "0.60rem");
+      
+        cardTextDiv.append(imgEl);
+        cardTextDiv.append(minTempEl);
+        cardTextDiv.append(maxTempEl);
+        cardTextDiv.append(humidityEl);
+        cardTitleDiv.append(cardTitleHeader);
+        cardBlockDiv.append(cardTitleDiv);
+        cardBlockDiv.append(cardTextDiv);
+        cardEl.append(cardBlockDiv);
+        $(".card-deck").append(cardEl);
+      }
 
                 if(thisMoment.format("HH:mm:ss") === "11:00:00" || thisMoment.format("HH:mm:ss") === "12:00:00" || thisMoment.format("HH:mm:ss") === "13:00:00"){
                     fiveDayForecast +=
