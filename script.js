@@ -18,11 +18,12 @@ var iconcode = "";
 var iconurl = "";
 var country = "";
 
-var anError = (response) => {
-    if(!response.ok){
-        throw Error(response.statusText);
-    }
-    return response;
+var listOfSearchedCities = [];
+
+var getSeachedCitiesFromLS = JSON.parse(localStorage.getItem("searched-cities"));
+if (getSeachedCitiesFromLS !== null) {
+  getSeachedCitiesFromLS.forEach(function(city) {city.toUpperCase();});
+  listOfSearchedCities = getSeachedCitiesFromLS;  
 }
 
 var getCurrentConditions = (event) => {
