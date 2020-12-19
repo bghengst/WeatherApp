@@ -1,6 +1,22 @@
-var ownKey = "f54881811ae9445900b1b062062864be";
-var currentCity = "";
-var lastCity = "";
+var APIKey = "f54881811ae9445900b1b062062864be";
+var city = "";
+var currentDate = "";
+var tempF = "";
+var humidityValue = "";
+var windSpeed = "";
+var uvIndexValue = "";
+var latitude = "";
+var longitude = "";
+var minTempK = "";
+var maxTempK = "";
+var minTempF = "";
+var maxTempF = "";
+var dayhumidity = "";
+var currentWeatherIconCode = "";
+var currentWeatherIconUrl = "";
+var iconcode = "";
+var iconurl = "";
+var country = "";
 
 var anError = (response) => {
     if(!response.ok){
@@ -9,29 +25,32 @@ var anError = (response) => {
     return response;
 }
 
-var currentWeather = (event) => {
-    let city = $('#search-city').val();
-    currentCity = $("#search-city").val();
+var getCurrentConditions = (event) => {
 
-    let queryURL="api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + ownKey;
+  let city = $('#search-city').val();
+ currentCity = $("#search-city").val();
 
-    fetch(queryURL)
-    .then(anError)
-    .then(response) => {
-        return response.json();
-    })
+     let queryURL="api.openweathermap.org/data/2.5/weather?q=" + city + "&appID" + ownKey;
 
-    .then((response) => {
+                fetch(queryURL)
+                .then(anError)
+                .then(response) => {
+                 return response.json()
+                 })
+            
+
+
+    then((response) => {
 
         saveCity(city);
         $('#search-error').text("");
 
-        let currentWeatherIcon="api.openweathermap.org/data/2.5/weather?q=" + response.weather[0].icon + ".png";
+        let currentWeatherIcon="https://openweathermap.org/img/w/" + response.weather[0].icon + ".png";
 
         let currentTimeUTC = response.dt;
         let currentTimeZoneOffset=response.timezone;
         let currentTimeZoneOffsetHours = currentTimeZoneOffset / 60 / 60;
-        let currentMoment = moment.unix(currentTimeUTC).utcOffset(currentTimeZoneOffsetHours);
+        let currentMoment = moment.unix(currentTimeUTC).utc().utcOffset(currentTimeZoneOffsetHours);
 
         renderCities();
 
@@ -41,6 +60,7 @@ var currentWeather = (event) => {
 
         let currentWeatherHTML =
             <h3>${response.name} ${currentMoment.format("(MM/DD/YY)")}<img src="${currentWeatherIcon}"></h3>
+                
             <ul class="list-unstyled">
                 <li>Temperature: $(response.main.temp)&#8457;</li>
                 <li>Humidity: ${response.main.humidity}%</li>
@@ -192,9 +212,18 @@ var renderCities = () => {
         getCurrentConditions(event);
     })
 
-$('#city-results').on("click", (event) => {
+$('#city-results').on("click", (event)  {
     event.preventDefault();
     $('#search-city').val(event.target.textContent);
     currentCity=$('#search-city').val();
     getCurrentConditions(event);
 })
+
+$("#clear-storage").on("click", (event) {
+    localStorage.clear();
+    renderCities();
+})
+
+renderCities();
+
+getCurrentConditions();
