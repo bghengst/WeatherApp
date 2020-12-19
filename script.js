@@ -1,4 +1,4 @@
-var APIKey = "f54881811ae9445900b1b062062864be";
+var APIKey = "166a433c57516f51dfab1f7edaed8413";
 var city = "";
 var currentDate = "";
 var tempF = "";
@@ -66,7 +66,7 @@ $(document).ready(function(){
             clearDisplayedWeatherInfo();
             resetGlobalVariables();
             searchCity(cityName);
-    });
+         });
 
     function displayCurrentWeather() {
         var cardDiv = $("<div class='container border bg-light'>");
@@ -77,7 +77,7 @@ $(document).ready(function(){
         var humidityEl = $("<p>").text("Humidity: " + humidityValue + "%");
         var windSpeedEl = $("<p>").text("Wind Speed: " + windSpeed + " MPH");
         var uvIndexEl = $("<p>").text("UV Index: ");
-        // var uvIndexValueEl = $("<span>").text(uvIndexValue).css("background-color", getColorCodeForUVIndex(uvIndexValue)).addClass("text-white");
+        
         var uvIndexValueEl = $("<span>").text(uvIndexValue).css("background-color", getColorCodeForUVIndex(uvIndexValue)); 
         uvIndexEl.append(uvIndexValueEl);
         cardDiv.append(cardHeader);
@@ -222,6 +222,7 @@ $(document).ready(function(){
           url: fiveDayQueryUrl,
           method: "GET"
         })
+
         .then(function(response) {
           var fiveDayForecast = response.list;
           addCardDeckHeader()
