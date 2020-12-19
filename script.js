@@ -190,25 +190,28 @@ $(document).ready(function(){
  })
 
 
-            if (city === currentCity){
-                cityEl = '<button type="button" class="list-group-item-action active">${city}</button></li>' ;
-
-            } else {
-                cityEl ='<button type="button" class="list-group-item list-group-item-action">${city}</button></li>' ;
-            }
-
-            $('#city-results').prepend(cityEl);
-        }
-
-        if (localStorage.length>0){
-            $('#clear-storage').html($('<a id ="clear-storage" href="#">clear</a>'));
-        }
-            else{
-                $('#clear-storage').html('');
-            }
-
-    }
-}
+ .then(function(response) {
+    var result = response;
+    console.log(result);
+    city = result.name.trim();
+  
+  
+   currentDate = moment.unix(result.dt).format("l");
+   console.log(currentDate);
+    var tempK = result.main.temp;
+  
+    tempF = ((tempK - 273.15) * 1.80 + 32).toFixed(1);
+    humidityValue = result.main.humidity;
+    windSpeed = result.wind.speed;
+    currentWeatherIconCode = result.weather[0].icon;
+    currentWeatherIconUrl = "https://openweathermap.org/img/w/" + currentWeatherIconCode + ".png";
+    var latitude = result.coord.lat;
+    var longitude = result.coord.lon;
+    var uvIndexQueryUrl = "https://api.openweathermap.org/data/2.5/uvi?&appid=" + APIKey + "&lat=" + latitude + "&lon=" + longitude;
+    $.ajax({
+      url: uvIndexQueryUrl,
+      method: "GET"
+    })
 
     $('#search-button').on("click", (event) => {
         event.preventDefault();
