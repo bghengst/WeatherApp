@@ -26,18 +26,13 @@ if (getSeachedCitiesFromLS !== null) {
   listOfSearchedCities = getSeachedCitiesFromLS;  
 }
 
-var getCurrentConditions = (event) => {
-
-  let city = $('#search-city').val();
- currentCity = $("#search-city").val();
-
-     let queryURL="api.openweathermap.org/data/2.5/weather?q=" + city + "&appID" + ownKey;
-
-                fetch(queryURL)
-                .then(anError)
-                .then(response) => {
-                 return response.json()
-                 })
+$(document).ready(function(){
+    displayCities(listOfSearchedCities);
+    if (getSeachedCitiesFromLS !== null) {
+      var lastCity = listOfSearchedCities[0];
+      searchCity(lastCity);
+    }
+  });
             
 
 
