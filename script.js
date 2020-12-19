@@ -134,18 +134,26 @@ $(document).ready(function(){
         }
       }
 
-        for (let i = 0; i < localStorage.length; i++){
-            if (localStorage["cities" + i] === newCity){
-                cityExists = true;
-                break;
-            }
-
+      function getColorCodeForUVIndex(uvIndex) {
+        var uvIndexValue = parseFloat(uvIndex);
+        var colorcode = "";
+        if (uvIndexValue <= 2) {
+          colorcode = "#00ff00";
         }
-
-        if (cityExists === false){
-            localStorage.setItem('cities' + localStorage.length, newCity);
+        else if ((uvIndexValue > 2) && (uvIndexValue <= 5)) {
+          colorcode = "#ffff00";
         }
-    }
+        else if ((uvIndexValue > 5) && (uvIndexValue <= 7)) {
+          colorcode = "#ffa500";
+        }
+        else if ((uvIndexValue > 7) && (uvIndexValue <= 10)) {
+          colorcode = "#9e1a1a";
+        }
+        else if (uvIndexValue > 10) {
+          colorcode = "#7f00ff";
+        }
+        return colorcode;
+      }
 
 var renderCities = () => {
     $('#city-results').empty();
