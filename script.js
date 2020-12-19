@@ -60,20 +60,13 @@ $(document).ready(function(){
         </a>`);
       }
     });
-    
-        $('#current-weather').html(currentWeatherHTML);
 
-        let latitude = response.coord.lat;
-        let longitude = response.coord.lon;
-        let uvQueryURL = "api.openweathermap.org/data/2.5/uvi?lat=" + latitude + "&lon=" + longitude + "&appid=" + ownKey;
-
-        uvQueryURL = "https://cors-anywhere.herokuapp.com/" + uvQueryURL;
-
-        fetch(uvQueryURL)
-        .then(anError)
-        .then((response)) => {
-            return response.json();
-        })
+        $(document).on("click", ".list-group-item", function() {
+             var cityName = $(this).text();
+            clearDisplayedWeatherInfo();
+            resetGlobalVariables();
+            searchCity(cityName);
+    });
 
         .then((response)) => {
             let uvIndex = response.value;
